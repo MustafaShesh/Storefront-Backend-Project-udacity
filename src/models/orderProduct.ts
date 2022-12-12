@@ -12,7 +12,6 @@ export class OrderProductStore {
     try {
       //@ts-ignore
       const conn = await client.connect()
-      console.log('Connection success')
       const ordersql = 'SELECT * FROM orders WHERE id=($1)'
       const result = await conn.query(ordersql, [orderId])
       const order = result.rows[0]

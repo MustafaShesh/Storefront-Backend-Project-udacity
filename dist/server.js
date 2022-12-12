@@ -10,7 +10,7 @@ var userRoute_1 = __importDefault(require("./routes/userRoute"));
 var orderRoute_1 = __importDefault(require("./routes/orderRoute"));
 var productRoute_1 = __importDefault(require("./routes/productRoute"));
 var orderProductRoutes_1 = __importDefault(require("./routes/orderProductRoutes"));
-var dashboard_1 = __importDefault(require("./routes/dashboard"));
+var dashboardRoutes_1 = __importDefault(require("./routes/dashboardRoutes"));
 // Intialization
 var app = (0, express_1.default)();
 var port = 3000;
@@ -23,7 +23,7 @@ app.use(body_parser_1.default.json(), (0, cors_1.default)(corsOptions));
 (0, productRoute_1.default)(app);
 (0, orderRoute_1.default)(app);
 (0, orderProductRoutes_1.default)(app);
-(0, dashboard_1.default)(app);
+(0, dashboardRoutes_1.default)(app);
 // routes
 app.listen(port, function () {
     console.log("server started at http://localhost:".concat(port));

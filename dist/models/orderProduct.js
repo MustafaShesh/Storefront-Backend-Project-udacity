@@ -54,7 +54,6 @@ var OrderProductStore = /** @class */ (function () {
                         return [4 /*yield*/, database_1.default.connect()];
                     case 1:
                         conn = _a.sent();
-                        console.log('Connection success');
                         ordersql = 'SELECT * FROM orders WHERE id=($1)';
                         return [4 /*yield*/, conn.query(ordersql, [orderId])];
                     case 2:

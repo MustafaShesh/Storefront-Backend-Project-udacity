@@ -5,7 +5,7 @@ import userRoutes from './routes/userRoute'
 import orderRoutes from './routes/orderRoute'
 import productRoutes from './routes/productRoute'
 import orderProductsRoutes from './routes/orderProductRoutes'
-import dashboardRoutes from './routes/dashboard'
+import dashboardRoutes from './routes/dashboardRoutes'
 
 // Intialization
 const app: express.Application = express()

@@ -52,7 +52,6 @@ var OrderStore = /** @class */ (function () {
                     case 0: return [4 /*yield*/, database_1.default.connect()];
                     case 1:
                         conn = _a.sent();
-                        console.log('connection success');
                         sql = 'SELECT * FROM orders';
                         return [4 /*yield*/, conn.query(sql)];
                     case 2:
@@ -71,7 +70,6 @@ var OrderStore = /** @class */ (function () {
                     case 0: return [4 /*yield*/, database_1.default.connect()];
                     case 1:
                         conn = _a.sent();
-                        console.log('connection success');
                         sql = 'SELECT * FROM orders WHERE id=($1)';
                         return [4 /*yield*/, conn.query(sql, [id])];
                     case 2:
@@ -90,7 +88,6 @@ var OrderStore = /** @class */ (function () {
                     case 0: return [4 /*yield*/, database_1.default.connect()];
                     case 1:
                         conn = _a.sent();
-                        console.log('connection success');
                         sql = 'INSERT INTO orders (status, user_id) VALUES($1, $2) RETURNING *';
                         return [4 /*yield*/, conn.query(sql, [order.status, order.user_id])];
                     case 2:
@@ -111,7 +108,6 @@ var OrderStore = /** @class */ (function () {
                         return [4 /*yield*/, database_1.default.connect()];
                     case 1:
                         conn = _a.sent();
-                        console.log('connection success');
                         sql = 'UPDATE orders SET status=($1), user_id= ($2) WHERE id=($3)RETURNING *';
                         return [4 /*yield*/, conn.query(sql, [order.status, order.user_id, order.id])];
                     case 2:

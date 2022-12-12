@@ -22,29 +22,38 @@ describe("User Model", () => {
   it('should have a delete method', () => {
     expect(user.delete).toBeDefined();
   });
-
   it('create method should add a user', async () => {
     const result = await user.create({
       id: '',
       firstname: 'mustafa',
       lastname: 'gamal',
-      password: '123'
+      password: '123456'
     });
     expect(result).toEqual({
-      id: result.id,
-      firstname: result.firstname,
-      lastname: result.lastname,
-      password: result.password
+      id: "1",
+      firstname: 'mustafa',
+      lastname: 'gamal',
+      password: '123456'
     });
+  });
+
+  it('index method should return a list of users', async () => {
+    const result = await user.index();
+    expect(result).toEqual([{
+      id: "1",
+      firstname: 'mustafa',
+      lastname: 'gamal',
+      password: '123456'
+    }]);
   });
 
   it('show method should return the correct user', async () => {
     const result = await user.show("1");
     expect(result).toEqual({
-      id: result.id,
-      firstname: result.firstname,
-      lastname: result.lastname,
-      password: result.password
+      id: "1",
+      firstname: 'mustafa',
+      lastname: 'gamal',
+      password: '123456'
     });
   });
 

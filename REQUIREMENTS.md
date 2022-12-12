@@ -8,22 +8,27 @@ These are the notes from a meeting with the frontend developer that describe wha
 
 #### Products
 
--   Index: 'products' [GET]
--   Show: 'products/:id' [GET]
--   Create: 'products' [POST] [token required]
+-   Index: '/products' [GET]
+-   Show: '/products/:id' [GET]
+-   Create: '/products' [POST] [token required]
+-   Update: '/products/:id' [PUT]
+-   Destroy: '/products/:id' [DELETE]
 -   [OPTIONAL] Top 5 most popular products: '/five-most-popular' [GET]
--   [OPTIONAL] Products by category (args: product category)
+-   [OPTIONAL] Products by category (args: product category): '/products_by_category/:category' [GET]
 
 #### Users
 
--   Index [token required]
--   Show [token required]
--   Create N[token required]
+-   Index: '/users' [GET] [token required]
+-   Show: 'users/:id' [GET] [token required]
+-   Create N: '/users' [POST] [token required]
+-   Authenticate: '/users/authenticate' [POST] [token required]
+-   Update: '/products/:id' [PUT] [token required]
+-   Destroy: '/products/:id' [DELETE] [token required]
 
 #### Orders
 
--   Current Order by user (args: user id)[token required]
--   [OPTIONAL] Completed Orders by user (args: user id)[token required]
+-   Current Order by user (args: user id): '/orders-by-user/:id' [GET] [token required]
+-   [OPTIONAL] Completed Orders by user (args: user id) [token required]
 
 ## Data Shapes
 

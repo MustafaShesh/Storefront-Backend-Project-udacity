@@ -7,12 +7,10 @@
     "start": "nodemon build/server.js",
     "watch": "tsc-watch --esModuleInterop \"src/server.ts\" --outDir ./dist --onSuccess \"node ./dist/server.js\"",
     "dev": "npm run watch && npm run start",
-    "build": "npx tsc",
-    "jasmine": "jasmine -e test",
     "create": "db-migrate db:create store_front_test",
     "env": "db-migrate up:all --config \"./database.json\" -e test",
     "drop": "db-migrate db:drop store_front_test",
-    "test": "npm run create && npm run env && npm run build && jasmine && npm run drop",
+    "test": "npm run create && npm run env && npx tsc && jasmine && npm run drop",
     "lint": "eslint --fix \"./**/*.ts\"  ",
     "prettier": "prettier --config .prettierrc \"src/**/*.ts\" \"**/*.js\" --write"
   },
