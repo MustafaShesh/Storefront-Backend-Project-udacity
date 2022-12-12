@@ -59,36 +59,19 @@ describe("product Model", function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, product.create({
-                        id: 1,
+                        id: '',
                         name: 'Hat',
-                        price: 25,
+                        price: '25',
                         category: 'clothes'
                     })];
                 case 1:
                     result = _a.sent();
                     expect(result).toEqual({
-                        id: 1,
-                        name: 'Hat',
-                        price: 25,
-                        category: 'clothes'
+                        id: result.id,
+                        name: result.name,
+                        price: result.price,
+                        category: result.category
                     });
-                    return [2 /*return*/];
-            }
-        });
-    }); });
-    it('index method should return a list of products', function () { return __awaiter(void 0, void 0, void 0, function () {
-        var result;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4 /*yield*/, product.index()];
-                case 1:
-                    result = _a.sent();
-                    expect(result).toEqual([{
-                            id: 1,
-                            name: 'Hat',
-                            price: 25,
-                            category: 'clothes'
-                        }]);
                     return [2 /*return*/];
             }
         });
@@ -101,10 +84,10 @@ describe("product Model", function () {
                 case 1:
                     result = _a.sent();
                     expect(result).toEqual({
-                        id: 1,
-                        name: 'Hat',
-                        price: 25,
-                        category: 'clothes'
+                        id: result.id,
+                        name: result.name,
+                        price: result.price,
+                        category: result.category
                     });
                     return [2 /*return*/];
             }
@@ -115,7 +98,7 @@ describe("product Model", function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    product.delete('1');
+                    product.delete("1");
                     return [4 /*yield*/, product.index()];
                 case 1:
                     result = _a.sent();

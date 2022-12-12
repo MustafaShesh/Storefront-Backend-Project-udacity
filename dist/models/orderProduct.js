@@ -54,12 +54,13 @@ var OrderProductStore = /** @class */ (function () {
                         return [4 /*yield*/, database_1.default.connect()];
                     case 1:
                         conn = _a.sent();
+                        console.log('Connection success');
                         ordersql = 'SELECT * FROM orders WHERE id=($1)';
                         return [4 /*yield*/, conn.query(ordersql, [orderId])];
                     case 2:
                         result = _a.sent();
                         order = result.rows[0];
-                        if (!(order.status == "open")) return [3 /*break*/, 7];
+                        if (!(order.status == "active")) return [3 /*break*/, 7];
                         _a.label = 3;
                     case 3:
                         _a.trys.push([3, 6, , 7]);

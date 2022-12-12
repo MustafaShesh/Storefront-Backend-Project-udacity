@@ -1,9 +1,9 @@
 import client from "../database";
 
 export type Product = {
-  id?: number
+  id?: string
   name: string
-  price: number
+  price: string
   category: string
 }
 
@@ -12,7 +12,6 @@ export class ProductStore {
     try {
       // @ts-ignore
       const conn = await client.connect()
-      console.log('connection success')
       const sql = 'SELECT * FROM products'
       const result = await conn.query(sql)
       conn.release()
@@ -26,7 +25,6 @@ export class ProductStore {
     try {
       // @ts-ignore
       const conn = await client.connect()
-      console.log('connection success')
       const sql = 'SELECT * FROM products WHERE id=($1)'
       const result = await conn.query(sql, [id])
       conn.release()
@@ -40,7 +38,6 @@ export class ProductStore {
     try {
       // @ts-ignore
       const conn = await client.connect()
-      console.log('connection success')
       const sql = 'INSERT INTO products (name, price, category) VALUES($1, $2, $3) RETURNING *'
       const result = await conn.query(sql, [product.name, product.price, product.category])
       conn.release()
@@ -54,7 +51,6 @@ export class ProductStore {
     try {
       // @ts-ignore
       const conn = await client.connect()
-      console.log('connection success')
       const sql = 'UPDATE products SET name=($1), price= ($2), category= ($3) WHERE id=($4)RETURNING *'
       const result = await conn.query(sql, [product.name, product.price, product.category, product.id])
       conn.release()

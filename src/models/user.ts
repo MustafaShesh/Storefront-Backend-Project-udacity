@@ -5,7 +5,7 @@ export const pepper: string = process.env.BCRYPT_PASSWORD as string
 export const saltRounds: string = process.env.SALT_ROUNDS as string
 
 export type User = {
-  id?: number
+  id?: string
   firstname: string
   lastname: string
   password: string
@@ -16,7 +16,6 @@ export class UserStore {
     try {
       // @ts-ignore
       const conn = await client.connect()
-      console.log('connection success')
       const sql = 'SELECT * FROM users'
       const result = await conn.query(sql)
       conn.release()
@@ -30,7 +29,6 @@ export class UserStore {
     try {
       // @ts-ignore
       const conn = await client.connect()
-      console.log('connection success')
       const sql = 'SELECT * FROM users WHERE id=($1)'
       const result = await conn.query(sql, [id])
       conn.release()
@@ -44,11 +42,11 @@ export class UserStore {
     try {
       // @ts-ignore
       const conn = await client.connect()
-      console.log('connection success')
       const sql = 'INSERT INTO users (firstname, lastname, password) VALUES($1, $2, $3) RETURNING *'
       const hash = bcrypt.hashSync(user.password + pepper, parseInt(saltRounds))
       const result = await conn.query(sql, [user.firstname, user.lastname, hash])
       conn.release()
+
       return result.rows[0]
     } catch (error) {
       throw new Error(`${error}`)
@@ -77,7 +75,6 @@ export class UserStore {
     try {
       // @ts-ignore
       const conn = await client.connect()
-      console.log('connection success')
       const sql = 'UPDATE users SET firstname=($1), lastname=($2), password=($3) WHERE id=($4) RETURNING *'
       const result = await conn.query(sql, [user.firstname, user.lastname, user.password, user.id])
       conn.release()

@@ -1,10 +1,10 @@
 import express from 'express'
-import { usersWithOrders, productsInOrders, fiveMostExpensive } from '../handlers/dashboard'
+import { ordersByUser, productsByCategory, fiveMostPopular } from '../handlers/dashboard'
 
 const dashboardRoutes = (app: express.Application) => {
-  app.get('/users-with-orders', usersWithOrders)
-  app.get('/products_in_orders', productsInOrders)
-  app.get('/five-most-expensive', fiveMostExpensive)
+  app.get('/orders-by-user/:id', ordersByUser)
+  app.get('/products_by_category/:category', productsByCategory)
+  app.get('/five-most-popular', fiveMostPopular)
 }
 
 export default dashboardRoutes

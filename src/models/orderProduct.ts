@@ -12,11 +12,12 @@ export class OrderProductStore {
     try {
       //@ts-ignore
       const conn = await client.connect()
+      console.log('Connection success')
       const ordersql = 'SELECT * FROM orders WHERE id=($1)'
       const result = await conn.query(ordersql, [orderId])
       const order = result.rows[0]
       // get order to see if it is open
-      if (order.status == "open") {
+      if (order.status == "active") {
         try {
           //@ts-ignore
           const conn = await client.connect()

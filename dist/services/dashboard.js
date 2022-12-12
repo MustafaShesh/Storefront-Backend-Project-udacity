@@ -39,71 +39,41 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.OrderStore = void 0;
+exports.DashboardQueries = void 0;
 var database_1 = __importDefault(require("../database"));
-var OrderStore = /** @class */ (function () {
-    function OrderStore() {
+var DashboardQueries = /** @class */ (function () {
+    function DashboardQueries() {
     }
-    OrderStore.prototype.index = function () {
+    // Get all users that have made orders
+    DashboardQueries.prototype.ordersByUser = function (id) {
         return __awaiter(this, void 0, void 0, function () {
-            var conn, sql, result;
+            var conn, sql, result, err_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, database_1.default.connect()];
+                    case 0:
+                        _a.trys.push([0, 3, , 4]);
+                        return [4 /*yield*/, database_1.default.connect()];
                     case 1:
                         conn = _a.sent();
                         console.log('connection success');
-                        sql = 'SELECT * FROM orders';
+                        sql = "SELECT status FROM orders WHERE orders.user_id = ".concat(id);
                         return [4 /*yield*/, conn.query(sql)];
                     case 2:
                         result = _a.sent();
                         conn.release();
                         return [2 /*return*/, result.rows];
+                    case 3:
+                        err_1 = _a.sent();
+                        throw new Error("unable get users with orders: ".concat(err_1));
+                    case 4: return [2 /*return*/];
                 }
             });
         });
     };
-    OrderStore.prototype.show = function (id) {
+    // Get all products that have been included in orders
+    DashboardQueries.prototype.productsByCategory = function (category) {
         return __awaiter(this, void 0, void 0, function () {
-            var conn, sql, result;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, database_1.default.connect()];
-                    case 1:
-                        conn = _a.sent();
-                        console.log('connection success');
-                        sql = 'SELECT * FROM orders WHERE id=($1)';
-                        return [4 /*yield*/, conn.query(sql, [id])];
-                    case 2:
-                        result = _a.sent();
-                        conn.release();
-                        return [2 /*return*/, result.rows[0]];
-                }
-            });
-        });
-    };
-    OrderStore.prototype.create = function (order) {
-        return __awaiter(this, void 0, void 0, function () {
-            var conn, sql, result;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, database_1.default.connect()];
-                    case 1:
-                        conn = _a.sent();
-                        console.log('connection success');
-                        sql = 'INSERT INTO orders (status, user_id) VALUES($1, $2) RETURNING *';
-                        return [4 /*yield*/, conn.query(sql, [order.status, order.user_id])];
-                    case 2:
-                        result = _a.sent();
-                        conn.release();
-                        return [2 /*return*/, result.rows[0]];
-                }
-            });
-        });
-    };
-    OrderStore.prototype.edit = function (order) {
-        return __awaiter(this, void 0, void 0, function () {
-            var conn, sql, result, error_1;
+            var conn, sql, result, err_2;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -112,23 +82,24 @@ var OrderStore = /** @class */ (function () {
                     case 1:
                         conn = _a.sent();
                         console.log('connection success');
-                        sql = 'UPDATE orders SET status=($1), user_id= ($2) WHERE id=($3)RETURNING *';
-                        return [4 /*yield*/, conn.query(sql, [order.status, order.user_id, order.id])];
+                        sql = "SELECT name, price FROM products WHERE products.category='".concat(category, "'");
+                        return [4 /*yield*/, conn.query(sql)];
                     case 2:
                         result = _a.sent();
                         conn.release();
-                        return [2 /*return*/, result.rows[0]];
+                        return [2 /*return*/, result.rows];
                     case 3:
-                        error_1 = _a.sent();
-                        throw new Error("".concat(error_1));
+                        err_2 = _a.sent();
+                        throw new Error("unable get products and orders: ".concat(err_2));
                     case 4: return [2 /*return*/];
                 }
             });
         });
     };
-    OrderStore.prototype.delete = function (id) {
+    // Get all users that have made orders
+    DashboardQueries.prototype.fiveMostPopular = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var conn, sql, result, error_2;
+            var conn, sql, result, err_3;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -136,20 +107,20 @@ var OrderStore = /** @class */ (function () {
                         return [4 /*yield*/, database_1.default.connect()];
                     case 1:
                         conn = _a.sent();
-                        sql = 'DELETE FROM orders WHERE id=($1)';
-                        return [4 /*yield*/, conn.query(sql, [id])];
+                        sql = 'SELECT name, SUM(order_products.quantity) FROM products INNER JOIN order_products ON products.id = order_products.product_id GROUP BY name ORDER BY COUNT(order_products.quantity) DESC LIMIT 5';
+                        return [4 /*yield*/, conn.query(sql)];
                     case 2:
                         result = _a.sent();
                         conn.release();
-                        return [2 /*return*/, result.rows[0]];
+                        return [2 /*return*/, result.rows];
                     case 3:
-                        error_2 = _a.sent();
-                        throw new Error("".concat(error_2));
+                        err_3 = _a.sent();
+                        throw new Error("unable get products by price: ".concat(err_3));
                     case 4: return [2 /*return*/];
                 }
             });
         });
     };
-    return OrderStore;
+    return DashboardQueries;
 }());
-exports.OrderStore = OrderStore;
+exports.DashboardQueries = DashboardQueries;

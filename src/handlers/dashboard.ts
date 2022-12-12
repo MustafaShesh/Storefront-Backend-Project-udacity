@@ -3,9 +3,9 @@ import { DashboardQueries } from '../services/dashboard'
 
 const dashboard = new DashboardQueries()
 
-export const usersWithOrders = async (_req: Request, res: Response) => {
+export const ordersByUser = async (_req: Request, res: Response) => {
   try {
-    const users = await dashboard.usersWithOrders()
+    const users = await dashboard.ordersByUser(_req.params.id)
     res.json(users)
     console.log('this is the INDEX route')
   } catch (err) {
@@ -14,9 +14,9 @@ export const usersWithOrders = async (_req: Request, res: Response) => {
   }
 }
 
-export const productsInOrders = async (_req: Request, res: Response) => {
+export const productsByCategory = async (_req: Request, res: Response) => {
   try {
-    const products = await dashboard.productsInOrders()
+    const products = await dashboard.productsByCategory(_req.params.category)
     res.json(products)
     console.log('this is the INDEX route')
   } catch (err) {
@@ -25,7 +25,7 @@ export const productsInOrders = async (_req: Request, res: Response) => {
   }
 }
 
-export const fiveMostExpensive = async (_req: Request, res: Response) => {
-  const users = await dashboard.fiveMostExpensive()
+export const fiveMostPopular = async (_req: Request, res: Response) => {
+  const users = await dashboard.fiveMostPopular()
   res.json(users)
 }

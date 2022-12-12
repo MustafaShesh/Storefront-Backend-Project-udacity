@@ -49,71 +49,89 @@ var UserStore = /** @class */ (function () {
     }
     UserStore.prototype.index = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var conn, sql, result;
+            var conn, sql, result, error_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, database_1.default.connect()];
+                    case 0:
+                        _a.trys.push([0, 3, , 4]);
+                        return [4 /*yield*/, database_1.default.connect()];
                     case 1:
                         conn = _a.sent();
-                        console.log('connection success');
                         sql = 'SELECT * FROM users';
                         return [4 /*yield*/, conn.query(sql)];
                     case 2:
                         result = _a.sent();
                         conn.release();
                         return [2 /*return*/, result.rows];
+                    case 3:
+                        error_1 = _a.sent();
+                        throw new Error("".concat(error_1));
+                    case 4: return [2 /*return*/];
                 }
             });
         });
     };
     UserStore.prototype.show = function (id) {
         return __awaiter(this, void 0, void 0, function () {
-            var conn, sql, result;
+            var conn, sql, result, error_2;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, database_1.default.connect()];
+                    case 0:
+                        _a.trys.push([0, 3, , 4]);
+                        return [4 /*yield*/, database_1.default.connect()];
                     case 1:
                         conn = _a.sent();
-                        console.log('connection success');
                         sql = 'SELECT * FROM users WHERE id=($1)';
                         return [4 /*yield*/, conn.query(sql, [id])];
                     case 2:
                         result = _a.sent();
                         conn.release();
                         return [2 /*return*/, result.rows[0]];
+                    case 3:
+                        error_2 = _a.sent();
+                        throw new Error("".concat(error_2));
+                    case 4: return [2 /*return*/];
                 }
             });
         });
     };
     UserStore.prototype.create = function (user) {
         return __awaiter(this, void 0, void 0, function () {
-            var conn, sql, result;
+            var conn, sql, hash, result, error_3;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, database_1.default.connect()];
+                    case 0:
+                        _a.trys.push([0, 3, , 4]);
+                        return [4 /*yield*/, database_1.default.connect()];
                     case 1:
                         conn = _a.sent();
-                        console.log('connection success');
-                        sql = 'INSERT INTO users (firstName, lastName, password) VALUES($1, $2, $3) RETURNING *';
-                        return [4 /*yield*/, conn.query(sql, [user.firstname, user.lastname, user.password])];
+                        sql = 'INSERT INTO users (firstname, lastname, password) VALUES($1, $2, $3) RETURNING *';
+                        hash = bcrypt_1.default.hashSync(user.password + exports.pepper, parseInt(exports.saltRounds));
+                        return [4 /*yield*/, conn.query(sql, [user.firstname, user.lastname, hash])];
                     case 2:
                         result = _a.sent();
                         conn.release();
                         return [2 /*return*/, result.rows[0]];
+                    case 3:
+                        error_3 = _a.sent();
+                        throw new Error("".concat(error_3));
+                    case 4: return [2 /*return*/];
                 }
             });
         });
     };
-    UserStore.prototype.authenticate = function (username, password) {
+    UserStore.prototype.authenticate = function (firstname, lastname, password) {
         return __awaiter(this, void 0, void 0, function () {
-            var conn, sql, result, passHash;
+            var conn, sql, result, passHash, error_4;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, database_1.default.connect()];
+                    case 0:
+                        _a.trys.push([0, 3, , 4]);
+                        return [4 /*yield*/, database_1.default.connect()];
                     case 1:
                         conn = _a.sent();
-                        sql = 'SELECT password FROM users WHERE name=($1)';
-                        return [4 /*yield*/, conn.query(sql, [username])];
+                        sql = 'SELECT password FROM users WHERE firstname=($1) AND lastname=($2)';
+                        return [4 /*yield*/, conn.query(sql, [firstname, lastname])];
                     case 2:
                         result = _a.sent();
                         if (result.rows.length) {
@@ -123,35 +141,46 @@ var UserStore = /** @class */ (function () {
                             }
                         }
                         return [2 /*return*/, null];
+                    case 3:
+                        error_4 = _a.sent();
+                        throw new Error("".concat(error_4));
+                    case 4: return [2 /*return*/];
                 }
             });
         });
     };
     UserStore.prototype.edit = function (user) {
         return __awaiter(this, void 0, void 0, function () {
-            var conn, sql, result;
+            var conn, sql, result, error_5;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, database_1.default.connect()];
+                    case 0:
+                        _a.trys.push([0, 3, , 4]);
+                        return [4 /*yield*/, database_1.default.connect()];
                     case 1:
                         conn = _a.sent();
-                        console.log('connection success');
-                        sql = 'UPDATE users SET name=($1), password= ($2) WHERE id=($3)RETURNING *';
-                        return [4 /*yield*/, conn.query(sql, [user.firstname, user.password, user.id])];
+                        sql = 'UPDATE users SET firstname=($1), lastname=($2), password=($3) WHERE id=($4) RETURNING *';
+                        return [4 /*yield*/, conn.query(sql, [user.firstname, user.lastname, user.password, user.id])];
                     case 2:
                         result = _a.sent();
                         conn.release();
                         return [2 /*return*/, result.rows[0]];
+                    case 3:
+                        error_5 = _a.sent();
+                        throw new Error("".concat(error_5));
+                    case 4: return [2 /*return*/];
                 }
             });
         });
     };
     UserStore.prototype.delete = function (id) {
         return __awaiter(this, void 0, void 0, function () {
-            var conn, sql, result;
+            var conn, sql, result, error_6;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, database_1.default.connect()];
+                    case 0:
+                        _a.trys.push([0, 3, , 4]);
+                        return [4 /*yield*/, database_1.default.connect()];
                     case 1:
                         conn = _a.sent();
                         sql = 'DELETE FROM users WHERE id=($1)';
@@ -160,6 +189,10 @@ var UserStore = /** @class */ (function () {
                         result = _a.sent();
                         conn.release();
                         return [2 /*return*/, result.rows[0]];
+                    case 3:
+                        error_6 = _a.sent();
+                        throw new Error("".concat(error_6));
+                    case 4: return [2 /*return*/];
                 }
             });
         });

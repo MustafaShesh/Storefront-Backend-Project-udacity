@@ -5,10 +5,10 @@ import { verifyAuthToken } from '../middleware/authentication'
 const userRoutes = (app: express.Application) => {
   app.get('/users', index)
   app.get('/users/:id', show)
-  app.post('/users', verifyAuthToken, create)
-  app.post('/users/authenticate', verifyAuthToken, authenticate)
-  app.put('/users/:id', verifyAuthToken, update)
-  app.delete('/users/:id', verifyAuthToken, destroy)
+  app.post('/users', create)
+  app.post('/users/authenticate', authenticate)
+  app.put('/users/:id', update)
+  app.delete('/users/:id', destroy)
 }
 
 export default userRoutes

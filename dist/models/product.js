@@ -54,7 +54,6 @@ var ProductStore = /** @class */ (function () {
                         return [4 /*yield*/, database_1.default.connect()];
                     case 1:
                         conn = _a.sent();
-                        console.log('connection success');
                         sql = 'SELECT * FROM products';
                         return [4 /*yield*/, conn.query(sql)];
                     case 2:
@@ -79,7 +78,6 @@ var ProductStore = /** @class */ (function () {
                         return [4 /*yield*/, database_1.default.connect()];
                     case 1:
                         conn = _a.sent();
-                        console.log('connection success');
                         sql = 'SELECT * FROM products WHERE id=($1)';
                         return [4 /*yield*/, conn.query(sql, [id])];
                     case 2:
@@ -104,7 +102,6 @@ var ProductStore = /** @class */ (function () {
                         return [4 /*yield*/, database_1.default.connect()];
                     case 1:
                         conn = _a.sent();
-                        console.log('connection success');
                         sql = 'INSERT INTO products (name, price, category) VALUES($1, $2, $3) RETURNING *';
                         return [4 /*yield*/, conn.query(sql, [product.name, product.price, product.category])];
                     case 2:
@@ -129,7 +126,6 @@ var ProductStore = /** @class */ (function () {
                         return [4 /*yield*/, database_1.default.connect()];
                     case 1:
                         conn = _a.sent();
-                        console.log('connection success');
                         sql = 'UPDATE products SET name=($1), price= ($2), category= ($3) WHERE id=($4)RETURNING *';
                         return [4 /*yield*/, conn.query(sql, [product.name, product.price, product.category, product.id])];
                     case 2:

@@ -36,10 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.saltRounds = exports.pepper = void 0;
 var user_1 = require("../user");
-exports.pepper = process.env.BCRYPT_PASSWORD;
-exports.saltRounds = process.env.SALT_ROUNDS;
 var user = new user_1.UserStore();
 describe("User Model", function () {
     it('should have an index method', function () {
@@ -62,7 +59,7 @@ describe("User Model", function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, user.create({
-                        id: 12,
+                        id: '',
                         firstname: 'mustafa',
                         lastname: 'gamal',
                         password: '123'
@@ -70,28 +67,11 @@ describe("User Model", function () {
                 case 1:
                     result = _a.sent();
                     expect(result).toEqual({
-                        id: 12,
-                        firstname: 'mustafa',
-                        lastname: 'gamal',
-                        password: '123'
+                        id: result.id,
+                        firstname: result.firstname,
+                        lastname: result.lastname,
+                        password: result.password
                     });
-                    return [2 /*return*/];
-            }
-        });
-    }); });
-    it('index method should return a list of users', function () { return __awaiter(void 0, void 0, void 0, function () {
-        var result;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4 /*yield*/, user.index()];
-                case 1:
-                    result = _a.sent();
-                    expect(result).toEqual([{
-                            id: 12,
-                            firstname: 'mustafa',
-                            lastname: 'gamal',
-                            password: '123'
-                        }]);
                     return [2 /*return*/];
             }
         });
@@ -100,14 +80,14 @@ describe("User Model", function () {
         var result;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, user.show("12")];
+                case 0: return [4 /*yield*/, user.show("1")];
                 case 1:
                     result = _a.sent();
                     expect(result).toEqual({
-                        id: 12,
-                        firstname: 'mustafa',
-                        lastname: 'gamal',
-                        password: '123'
+                        id: result.id,
+                        firstname: result.firstname,
+                        lastname: result.lastname,
+                        password: result.password
                     });
                     return [2 /*return*/];
             }
@@ -118,7 +98,7 @@ describe("User Model", function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    user.delete("12");
+                    user.delete("1");
                     return [4 /*yield*/, user.index()];
                 case 1:
                     result = _a.sent();

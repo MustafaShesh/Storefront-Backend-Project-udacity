@@ -6,12 +6,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = __importDefault(require("express"));
 var cors_1 = __importDefault(require("cors"));
 var body_parser_1 = __importDefault(require("body-parser"));
-// import userRoutes from './routes/userRoute'
-// import bookRoutes from './routes/bookRoute'
-// import orderRoutes from './routes/orderRoute'
-// import productRoutes from './routes/productRoute'
-// import orderProductsRoutes from './routes/orderProductRoutes'
-// import dashboardRoutes from './routes/dashboard'
+var userRoute_1 = __importDefault(require("./routes/userRoute"));
+var orderRoute_1 = __importDefault(require("./routes/orderRoute"));
+var productRoute_1 = __importDefault(require("./routes/productRoute"));
+var orderProductRoutes_1 = __importDefault(require("./routes/orderProductRoutes"));
+var dashboard_1 = __importDefault(require("./routes/dashboard"));
 // Intialization
 var app = (0, express_1.default)();
 var port = 3000;
@@ -20,12 +19,11 @@ var corsOptions = {
     optionsSuccessStatus: 200 // some legacy browser (IE11, various)
 };
 app.use(body_parser_1.default.json(), (0, cors_1.default)(corsOptions));
-// userRoutes(app)
-// bookRoutes(app)
-// orderRoutes(app)
-// productRoutes(app)
-// orderProductsRoutes(app)
-// dashboardRoutes(app)
+(0, userRoute_1.default)(app);
+(0, productRoute_1.default)(app);
+(0, orderRoute_1.default)(app);
+(0, orderProductRoutes_1.default)(app);
+(0, dashboard_1.default)(app);
 // routes
 app.listen(port, function () {
     console.log("server started at http://localhost:".concat(port));

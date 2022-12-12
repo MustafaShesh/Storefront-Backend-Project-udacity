@@ -1,4 +1,4 @@
-import { UserStore } from '../user';
+import { User, UserStore } from '../user';
 
 const user = new UserStore()
 
@@ -25,36 +25,26 @@ describe("User Model", () => {
 
   it('create method should add a user', async () => {
     const result = await user.create({
-      id: 1,
+      id: '',
       firstname: 'mustafa',
       lastname: 'gamal',
       password: '123'
     });
     expect(result).toEqual({
-      id: 1,
-      firstname: 'mustafa',
-      lastname: 'gamal',
-      password: '123'
+      id: result.id,
+      firstname: result.firstname,
+      lastname: result.lastname,
+      password: result.password
     });
-  });
-
-  it('index method should return a list of users', async () => {
-    const result = await user.index();
-    expect(result).toEqual([{
-      id: 1,
-      firstname: 'mustafa',
-      lastname: 'gamal',
-      password: '123'
-    }]);
   });
 
   it('show method should return the correct user', async () => {
     const result = await user.show("1");
     expect(result).toEqual({
-      id: 1,
-      firstname: 'mustafa',
-      lastname: 'gamal',
-      password: '123'
+      id: result.id,
+      firstname: result.firstname,
+      lastname: result.lastname,
+      password: result.password
     });
   });
 

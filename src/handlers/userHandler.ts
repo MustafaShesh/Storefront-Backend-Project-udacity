@@ -29,7 +29,7 @@ export const show = async (req: Request, res: Response) => {
 
 export const create = async (req: Request, res: Response) => {
   const user: User = {
-    firstname: req.body.firstName,
+    firstname: req.body.firstname,
     lastname: req.body.lastname,
     password: req.body.password
   } as User
@@ -65,7 +65,7 @@ export const authenticate = async (req: Request, res: Response) => {
 
 export const update = async (req: Request, res: Response) => {
   const user: User = {
-    id: parseInt(req.params.id),
+    id: req.params.id,
     firstname: req.body.firstName,
     lastname: req.body.lastname,
     password: req.body.password
