@@ -55,7 +55,6 @@ var addProduct = function (_req, res) { return __awaiter(void 0, void 0, void 0,
                 return [4 /*yield*/, store.addProduct(orderProduct.quantity, orderProduct.order_id, orderProduct.product_id)];
             case 2:
                 addedProduct = _a.sent();
-                console.log(addedProduct);
                 res.json(addedProduct);
                 console.log('this is the add product route');
                 return [3 /*break*/, 4];

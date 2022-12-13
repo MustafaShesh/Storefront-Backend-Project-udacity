@@ -1,4 +1,4 @@
-import { User, UserStore } from '../user';
+import { UserStore } from '../user';
 
 const user = new UserStore()
 
@@ -22,6 +22,7 @@ describe("User Model", () => {
   it('should have a delete method', () => {
     expect(user.delete).toBeDefined();
   });
+
   it('create method should add a user', async () => {
     const result = await user.create({
       id: '',
@@ -30,30 +31,41 @@ describe("User Model", () => {
       password: '123456'
     });
     expect(result).toEqual({
-      id: "1",
-      firstname: 'mustafa',
-      lastname: 'gamal',
-      password: '123456'
+      id: result.id,
+      firstname: result.firstname,
+      lastname: result.lastname,
+      password: result.password
     });
   });
 
-  it('index method should return a list of users', async () => {
-    const result = await user.index();
-    expect(result).toEqual([{
-      id: "1",
-      firstname: 'mustafa',
-      lastname: 'gamal',
-      password: '123456'
-    }]);
+
+  it('authenticate method should authenticate a user', async () => {
+    const result = await user.authenticate("mustafa", "gamal", "123456");
+    expect(result).toBeTruthy();
   });
 
   it('show method should return the correct user', async () => {
     const result = await user.show("1");
     expect(result).toEqual({
-      id: "1",
-      firstname: 'mustafa',
+      id: result.id,
+      firstname: result.firstname,
+      lastname: result.lastname,
+      password: result.password
+    });
+  });
+
+  it('update method should return a edited user', async () => {
+    const result = await user.edit({
+      id: '1',
+      firstname: 'ahmed',
       lastname: 'gamal',
       password: '123456'
+    });
+    expect(result).toEqual({
+      id: result.id,
+      firstname: result.firstname,
+      lastname: result.lastname,
+      password: result.password
     });
   });
 

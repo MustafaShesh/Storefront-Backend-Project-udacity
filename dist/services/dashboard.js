@@ -44,7 +44,7 @@ var database_1 = __importDefault(require("../database"));
 var DashboardQueries = /** @class */ (function () {
     function DashboardQueries() {
     }
-    // Get all users that have made orders
+    // Get all orders that have been made by user
     DashboardQueries.prototype.ordersByUser = function (id) {
         return __awaiter(this, void 0, void 0, function () {
             var conn, sql, result, err_1;
@@ -64,13 +64,13 @@ var DashboardQueries = /** @class */ (function () {
                         return [2 /*return*/, result.rows];
                     case 3:
                         err_1 = _a.sent();
-                        throw new Error("unable get users with orders: ".concat(err_1));
+                        throw new Error("unable get order with users: ".concat(err_1));
                     case 4: return [2 /*return*/];
                 }
             });
         });
     };
-    // Get all products that have been included in orders
+    // Get all products by catehory
     DashboardQueries.prototype.productsByCategory = function (category) {
         return __awaiter(this, void 0, void 0, function () {
             var conn, sql, result, err_2;
@@ -90,13 +90,13 @@ var DashboardQueries = /** @class */ (function () {
                         return [2 /*return*/, result.rows];
                     case 3:
                         err_2 = _a.sent();
-                        throw new Error("unable get products and orders: ".concat(err_2));
+                        throw new Error("unable get products by category: ".concat(err_2));
                     case 4: return [2 /*return*/];
                 }
             });
         });
     };
-    // Get all users that have made orders
+    // Get all most five wanted products
     DashboardQueries.prototype.fiveMostPopular = function () {
         return __awaiter(this, void 0, void 0, function () {
             var conn, sql, result, err_3;
@@ -107,6 +107,7 @@ var DashboardQueries = /** @class */ (function () {
                         return [4 /*yield*/, database_1.default.connect()];
                     case 1:
                         conn = _a.sent();
+                        console.log('connection success');
                         sql = 'SELECT name, SUM(order_products.quantity) FROM products INNER JOIN order_products ON products.id = order_products.product_id GROUP BY name ORDER BY COUNT(order_products.quantity) DESC LIMIT 5';
                         return [4 /*yield*/, conn.query(sql)];
                     case 2:
@@ -115,7 +116,33 @@ var DashboardQueries = /** @class */ (function () {
                         return [2 /*return*/, result.rows];
                     case 3:
                         err_3 = _a.sent();
-                        throw new Error("unable get products by price: ".concat(err_3));
+                        throw new Error("unable get products by order: ".concat(err_3));
+                    case 4: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    // Get all completed orders by user
+    DashboardQueries.prototype.completedOrders = function (id) {
+        return __awaiter(this, void 0, void 0, function () {
+            var conn, sql, result, err_4;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 3, , 4]);
+                        return [4 /*yield*/, database_1.default.connect()];
+                    case 1:
+                        conn = _a.sent();
+                        console.log('connection success');
+                        sql = "SELECT status FROM orders INNER JOIN users ON orders.user_id = users.id WHERE status='complete' AND orders.user_id=".concat(id);
+                        return [4 /*yield*/, conn.query(sql)];
+                    case 2:
+                        result = _a.sent();
+                        conn.release();
+                        return [2 /*return*/, result.rows];
+                    case 3:
+                        err_4 = _a.sent();
+                        throw new Error("unable get completed orders by user: ".concat(err_4));
                     case 4: return [2 /*return*/];
                 }
             });

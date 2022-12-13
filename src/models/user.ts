@@ -59,6 +59,7 @@ export class UserStore {
       const conn = await client.connect()
       const sql = 'SELECT password FROM users WHERE firstname=($1) AND lastname=($2)'
       const result = await conn.query(sql, [firstname, lastname])
+      conn.release()
       if (result.rows.length) {
         const passHash = result.rows[0]
         if (bcrypt.compareSync(password + pepper, passHash.password)) {
@@ -75,8 +76,9 @@ export class UserStore {
     try {
       // @ts-ignore
       const conn = await client.connect()
-      const sql = 'UPDATE users SET firstname=($1), lastname=($2), password=($3) WHERE id=($4) RETURNING *'
-      const result = await conn.query(sql, [user.firstname, user.lastname, user.password, user.id])
+      const sql = `UPDATE users SET firstname=($1), lastname=($2), password=($3) WHERE id=($4) RETURNING *`
+      const hash = bcrypt.hashSync(user.password + pepper, parseInt(saltRounds))
+      const result = await conn.query(sql, [user.firstname, user.lastname, hash, user.id])
       conn.release()
       return result.rows[0]
     } catch (error) {

@@ -119,12 +119,12 @@ var create = function (req, res) { return __awaiter(void 0, void 0, void 0, func
 }); };
 exports.create = create;
 var authenticate = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var user, authUser, token, err_4;
+    var user, authUser, err_4;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 user = {
-                    firstname: req.body.firstName,
+                    firstname: req.body.firstname,
                     lastname: req.body.lastname,
                     password: req.body.password
                 };
@@ -134,8 +134,10 @@ var authenticate = function (req, res) { return __awaiter(void 0, void 0, void 0
                 return [4 /*yield*/, store.authenticate(user.firstname, user.lastname, user.password)];
             case 2:
                 authUser = _a.sent();
-                token = jsonwebtoken_1.default.sign({ user: authUser }, JWTtoken);
-                res.json({ message: 'Checking authentication', token: token });
+                if (authUser == null)
+                    res.json({ message: 'authentication failed' });
+                else
+                    res.json({ message: 'authorized' });
                 console.log('this is the authenticate route');
                 return [3 /*break*/, 4];
             case 3:
@@ -155,7 +157,7 @@ var update = function (req, res) { return __awaiter(void 0, void 0, void 0, func
             case 0:
                 user = {
                     id: req.params.id,
-                    firstname: req.body.firstName,
+                    firstname: req.body.firstname,
                     lastname: req.body.lastname,
                     password: req.body.password
                 };

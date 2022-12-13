@@ -118,6 +118,7 @@ var update = function (req, res) { return __awaiter(void 0, void 0, void 0, func
         switch (_a.label) {
             case 0:
                 product = {
+                    id: req.params.id,
                     name: req.body.name,
                     price: req.body.price,
                     category: req.body.category

@@ -43,6 +43,7 @@ export const create = async (req: Request, res: Response) => {
 
 export const update = async (req: Request, res: Response) => {
   const order: Order = {
+    id: req.params.id,
     status: req.body.status,
     user_id: req.body.user_id
   } as Order

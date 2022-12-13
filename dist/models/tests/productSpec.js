@@ -93,6 +93,28 @@ describe("product Model", function () {
             }
         });
     }); });
+    it('update method should return a edited product', function () { return __awaiter(void 0, void 0, void 0, function () {
+        var result;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, product.edit({
+                        id: '1',
+                        name: 'shirt',
+                        price: '25',
+                        category: 'clothes'
+                    })];
+                case 1:
+                    result = _a.sent();
+                    expect(result).toEqual({
+                        id: result.id,
+                        name: result.name,
+                        price: result.price,
+                        category: result.category
+                    });
+                    return [2 /*return*/];
+            }
+        });
+    }); });
     it('delete method should remove the product', function () { return __awaiter(void 0, void 0, void 0, function () {
         var result;
         return __generator(this, function (_a) {

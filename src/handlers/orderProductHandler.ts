@@ -12,7 +12,6 @@ export const addProduct = async (_req: Request, res: Response) => {
 
   try {
     const addedProduct = await store.addProduct(orderProduct.quantity, orderProduct.order_id, orderProduct.product_id)
-    console.log(addedProduct)
     res.json(addedProduct)
     console.log('this is the add product route')
   } catch (err) {

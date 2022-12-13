@@ -9,7 +9,6 @@ var JWTtoken = process.env.TOKEN_SECRET;
 var verifyAuthToken = function (req, res, next) {
     try {
         var authorizationHeader = req.headers.authorization;
-        console.log(authorizationHeader);
         var token = authorizationHeader.split(' ')[1];
         var decoded = jsonwebtoken_1.default.verify(token, JWTtoken);
         next();

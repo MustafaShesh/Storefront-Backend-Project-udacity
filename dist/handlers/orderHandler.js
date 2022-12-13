@@ -117,6 +117,7 @@ var update = function (req, res) { return __awaiter(void 0, void 0, void 0, func
         switch (_a.label) {
             case 0:
                 order = {
+                    id: req.params.id,
                     status: req.body.status,
                     user_id: req.body.user_id
                 };

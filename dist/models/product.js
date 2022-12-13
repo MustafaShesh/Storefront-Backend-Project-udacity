@@ -126,7 +126,7 @@ var ProductStore = /** @class */ (function () {
                         return [4 /*yield*/, database_1.default.connect()];
                     case 1:
                         conn = _a.sent();
-                        sql = 'UPDATE products SET name=($1), price= ($2), category= ($3) WHERE id=($4)RETURNING *';
+                        sql = 'UPDATE products SET name=($1), price= ($2), category= ($3) WHERE id=($4) RETURNING *';
                         return [4 /*yield*/, conn.query(sql, [product.name, product.price, product.category, product.id])];
                     case 2:
                         result = _a.sent();

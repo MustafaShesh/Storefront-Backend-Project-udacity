@@ -134,6 +134,7 @@ var UserStore = /** @class */ (function () {
                         return [4 /*yield*/, conn.query(sql, [firstname, lastname])];
                     case 2:
                         result = _a.sent();
+                        conn.release();
                         if (result.rows.length) {
                             passHash = result.rows[0];
                             if (bcrypt_1.default.compareSync(password + exports.pepper, passHash.password)) {
@@ -151,7 +152,7 @@ var UserStore = /** @class */ (function () {
     };
     UserStore.prototype.edit = function (user) {
         return __awaiter(this, void 0, void 0, function () {
-            var conn, sql, result, error_5;
+            var conn, sql, hash, result, error_5;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -159,8 +160,9 @@ var UserStore = /** @class */ (function () {
                         return [4 /*yield*/, database_1.default.connect()];
                     case 1:
                         conn = _a.sent();
-                        sql = 'UPDATE users SET firstname=($1), lastname=($2), password=($3) WHERE id=($4) RETURNING *';
-                        return [4 /*yield*/, conn.query(sql, [user.firstname, user.lastname, user.password, user.id])];
+                        sql = "UPDATE users SET firstname=($1), lastname=($2), password=($3) WHERE id=($4) RETURNING *";
+                        hash = bcrypt_1.default.hashSync(user.password + exports.pepper, parseInt(exports.saltRounds));
+                        return [4 /*yield*/, conn.query(sql, [user.firstname, user.lastname, hash, user.id])];
                     case 2:
                         result = _a.sent();
                         conn.release();

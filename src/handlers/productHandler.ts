@@ -44,6 +44,7 @@ export const create = async (req: Request, res: Response) => {
 
 export const update = async (req: Request, res: Response) => {
   const product: Product = {
+    id: req.params.id,
     name: req.body.name,
     price: req.body.price,
     category: req.body.category

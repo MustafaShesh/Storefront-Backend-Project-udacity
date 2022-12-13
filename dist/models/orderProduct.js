@@ -77,7 +77,7 @@ var OrderProductStore = /** @class */ (function () {
                         throw new Error("Could not add product ".concat(productId, " to order ").concat(orderId, ": ").concat(err_1));
                     case 7:
                         conn.release();
-                        throw new Error("Could not add product ".concat(productId, " to order ").concat(orderId, " because order status is ").concat(order.status));
+                        return [2 /*return*/, order.status];
                     case 8:
                         err_2 = _a.sent();
                         throw new Error("".concat(err_2));

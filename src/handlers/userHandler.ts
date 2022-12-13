@@ -1,3 +1,4 @@
+import client from '../database';
 import { Request, Response } from 'express'
 import { User, UserStore } from '../models/user'
 import jwt, { Secret } from 'jsonwebtoken'
@@ -47,15 +48,16 @@ export const create = async (req: Request, res: Response) => {
 
 export const authenticate = async (req: Request, res: Response) => {
   const user: User = {
-    firstname: req.body.firstName,
+    firstname: req.body.firstname,
     lastname: req.body.lastname,
     password: req.body.password
   } as User
-
   try {
     const authUser = await store.authenticate(user.firstname, user.lastname, user.password)
-    var token = jwt.sign({ user: authUser }, JWTtoken)
-    res.json({ message: 'Checking authentication', token })
+    if (authUser == null)
+      res.json({ message: 'authentication failed' })
+    else
+      res.json({ message: 'authorized' })
     console.log('this is the authenticate route')
   } catch (err) {
     res.status(400)
@@ -66,7 +68,7 @@ export const authenticate = async (req: Request, res: Response) => {
 export const update = async (req: Request, res: Response) => {
   const user: User = {
     id: req.params.id,
-    firstname: req.body.firstName,
+    firstname: req.body.firstname,
     lastname: req.body.lastname,
     password: req.body.password
   } as User

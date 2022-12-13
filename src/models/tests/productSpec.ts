@@ -48,6 +48,21 @@ describe("product Model", () => {
     });
   });
 
+  it('update method should return a edited product', async () => {
+    const result = await product.edit({
+      id: '1',
+      name: 'shirt',
+      price: '25',
+      category: 'clothes'
+    });
+    expect(result).toEqual({
+      id: result.id,
+      name: result.name,
+      price: result.price,
+      category: result.category
+    });
+  });
+
   it('delete method should remove the product', async () => {
     product.delete("1");
     const result = await product.index()

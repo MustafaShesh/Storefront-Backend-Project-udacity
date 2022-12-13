@@ -26,6 +26,21 @@ export const productsByCategory = async (_req: Request, res: Response) => {
 }
 
 export const fiveMostPopular = async (_req: Request, res: Response) => {
-  const users = await dashboard.fiveMostPopular()
-  res.json(users)
+  try {
+    const users = await dashboard.fiveMostPopular()
+    res.json(users)
+  } catch (err) {
+    res.status(400)
+    res.json(err)
+  }
+}
+
+export const completedOrders = async (_req: Request, res: Response) => {
+  try {
+    const orders = await dashboard.completedOrders(_req.params.id)
+    res.json(orders)
+  } catch (err) {
+    res.status(400)
+    res.json(err)
+  }
 }

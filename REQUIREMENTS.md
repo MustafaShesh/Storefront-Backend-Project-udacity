@@ -14,7 +14,7 @@ These are the notes from a meeting with the frontend developer that describe wha
 -   Update: '/products/:id' [PUT]
 -   Destroy: '/products/:id' [DELETE]
 -   [OPTIONAL] Top 5 most popular products: '/five-most-popular' [GET]
--   [OPTIONAL] Products by category (args: product category): '/products_by_category/:category' [GET]
+-   [OPTIONAL] Products by category (args: product category name): '/products/category/:category' [GET]
 
 #### Users
 
@@ -22,34 +22,46 @@ These are the notes from a meeting with the frontend developer that describe wha
 -   Show: 'users/:id' [GET] [token required]
 -   Create N: '/users' [POST] [token required]
 -   Authenticate: '/users/authenticate' [POST] [token required]
--   Update: '/products/:id' [PUT] [token required]
--   Destroy: '/products/:id' [DELETE] [token required]
+-   Update: '/users/:id' [PUT] [token required]
+-   Destroy: '/users/:id' [DELETE] [token required]
 
 #### Orders
 
--   Current Order by user (args: user id): '/orders-by-user/:id' [GET] [token required]
--   [OPTIONAL] Completed Orders by user (args: user id) [token required]
+-   Index: '/orders' [GET]
+-   Show: '/orders/:id' [GET]
+-   Create: '/orders' [POST] [token required]
+-   Update: '/orders/:id' [PUT]
+-   Destroy: '/orders/:id' [DELETE]
+-   Add products to order: '/orders/:id/products' [POST] [token required]
+-   Current Order by user (args: user id): '/users/:id/orders' [GET] [token required]
+-   [OPTIONAL] Completed Orders by user (args: user id): '/users/:id/completed-orders' [GET] [token required]
 
 ## Data Shapes
 
 #### Product
 
--   id
--   name
--   price
--   [OPTIONAL] category
+-   id: varchar
+-   name: varcahr
+-   price: number
+-   [OPTIONAL] category: varchar
 
 #### User
 
--   id
--   firstName
--   lastName
--   password
+-   id: varchar
+-   firstName: varchar
+-   lastName: varcahr
+-   password: varchar
 
 #### Orders
 
--   id
+-   id: varchar
 -   id of each product in the order
--   quantity of each product in the order
--   user_id
--   status of order (active or complete)
+-   user_id: string[foreign key to users table]
+-   status of order: varchar (active or complete)
+
+#### Order of products
+
+-   id: varchar
+-   quantity of each product in the order: number
+-   id of order: string[foreign key to orders table]
+-   id of each product in the order: string[foreign key to products table]

@@ -62,7 +62,7 @@ describe("User Model", function () {
                         id: '',
                         firstname: 'mustafa',
                         lastname: 'gamal',
-                        password: '123'
+                        password: '123456'
                     })];
                 case 1:
                     result = _a.sent();
@@ -76,11 +76,45 @@ describe("User Model", function () {
             }
         });
     }); });
+    it('authenticate method should authenticate a user', function () { return __awaiter(void 0, void 0, void 0, function () {
+        var result;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, user.authenticate("mustafa", "gamal", "123456")];
+                case 1:
+                    result = _a.sent();
+                    expect(result).toBeTruthy();
+                    return [2 /*return*/];
+            }
+        });
+    }); });
     it('show method should return the correct user', function () { return __awaiter(void 0, void 0, void 0, function () {
         var result;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, user.show("1")];
+                case 1:
+                    result = _a.sent();
+                    expect(result).toEqual({
+                        id: result.id,
+                        firstname: result.firstname,
+                        lastname: result.lastname,
+                        password: result.password
+                    });
+                    return [2 /*return*/];
+            }
+        });
+    }); });
+    it('update method should return a edited user', function () { return __awaiter(void 0, void 0, void 0, function () {
+        var result;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, user.edit({
+                        id: '1',
+                        firstname: 'ahmed',
+                        lastname: 'gamal',
+                        password: '123456'
+                    })];
                 case 1:
                     result = _a.sent();
                     expect(result).toEqual({

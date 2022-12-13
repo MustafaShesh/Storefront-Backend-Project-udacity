@@ -29,7 +29,7 @@ export class OrderProductStore {
         }
       }
       conn.release()
-      throw new Error(`Could not add product ${productId} to order ${orderId} because order status is ${order.status}`)
+      return order.status
     } catch (err) {
       throw new Error(`${err}`)
     }

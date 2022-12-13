@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.fiveMostPopular = exports.productsByCategory = exports.ordersByUser = void 0;
+exports.completedOrders = exports.fiveMostPopular = exports.productsByCategory = exports.ordersByUser = void 0;
 var dashboard_1 = require("../services/dashboard");
 var dashboard = new dashboard_1.DashboardQueries();
 var ordersByUser = function (_req, res) { return __awaiter(void 0, void 0, void 0, function () {
@@ -84,15 +84,44 @@ var productsByCategory = function (_req, res) { return __awaiter(void 0, void 0,
 }); };
 exports.productsByCategory = productsByCategory;
 var fiveMostPopular = function (_req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var users;
+    var users, err_3;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, dashboard.fiveMostPopular()];
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, dashboard.fiveMostPopular()];
             case 1:
                 users = _a.sent();
                 res.json(users);
-                return [2 /*return*/];
+                return [3 /*break*/, 3];
+            case 2:
+                err_3 = _a.sent();
+                res.status(400);
+                res.json(err_3);
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
         }
     });
 }); };
 exports.fiveMostPopular = fiveMostPopular;
+var completedOrders = function (_req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var orders, err_4;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, dashboard.completedOrders(_req.params.id)];
+            case 1:
+                orders = _a.sent();
+                res.json(orders);
+                return [3 /*break*/, 3];
+            case 2:
+                err_4 = _a.sent();
+                res.status(400);
+                res.json(err_4);
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
+        }
+    });
+}); };
+exports.completedOrders = completedOrders;
