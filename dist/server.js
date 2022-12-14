@@ -28,3 +28,4 @@ app.use(body_parser_1.default.json(), (0, cors_1.default)(corsOptions));
 app.listen(port, function () {
     console.log("server started at http://localhost:".concat(port));
 });
+exports.default = app;

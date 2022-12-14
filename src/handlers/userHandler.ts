@@ -1,4 +1,3 @@
-import client from '../database';
 import { Request, Response } from 'express'
 import { User, UserStore } from '../models/user'
 import jwt, { Secret } from 'jsonwebtoken'
@@ -10,7 +9,6 @@ export const index = async (_req: Request, res: Response): Promise<void> => {
   try {
     const users = await store.index()
     res.json(users)
-    console.log('this is the INDEX route')
   } catch (err) {
     res.status(400)
     res.json(err)
@@ -21,7 +19,6 @@ export const show = async (req: Request, res: Response) => {
   try {
     const user = await store.show(req.params.id)
     res.json(user)
-    console.log('this is the SHOW route')
   } catch (err) {
     res.status(400)
     res.json(err)
@@ -39,7 +36,6 @@ export const create = async (req: Request, res: Response) => {
     const newUser = await store.create(user)
     var token = jwt.sign({ user: newUser }, JWTtoken)
     res.json({ message: 'User created successfully', token })
-    console.log('this is the CREATE route')
   } catch (err) {
     res.status(400)
     res.json(err)
@@ -58,7 +54,6 @@ export const authenticate = async (req: Request, res: Response) => {
       res.json({ message: 'authentication failed' })
     else
       res.json({ message: 'authorized' })
-    console.log('this is the authenticate route')
   } catch (err) {
     res.status(400)
     res.json(err)
@@ -76,7 +71,6 @@ export const update = async (req: Request, res: Response) => {
   try {
     const editUser = await store.edit(user)
     res.json({ message: 'User updated successfully', editUser })
-    console.log('this is the EDIT route')
   } catch (err) {
     res.status(400)
     res.json(err)
@@ -87,7 +81,6 @@ export const destroy = async (req: Request, res: Response) => {
   try {
     const deleted = await store.delete(req.params.id)
     res.json({ message: `User ${req.params.id} deleted`, deleted })
-    console.log('this is the DELETE route')
   } catch (err) {
     res.status(400)
     res.json(err)

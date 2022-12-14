@@ -76,6 +76,18 @@ describe("product Model", function () {
             }
         });
     }); });
+    it('index method should return a list of products', function () { return __awaiter(void 0, void 0, void 0, function () {
+        var result;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, product.index()];
+                case 1:
+                    result = _a.sent();
+                    expect(result.length).toBe(result.length);
+                    return [2 /*return*/];
+            }
+        });
+    }); });
     it('show method should return the correct product', function () { return __awaiter(void 0, void 0, void 0, function () {
         var result;
         return __generator(this, function (_a) {

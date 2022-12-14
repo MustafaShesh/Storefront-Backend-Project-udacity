@@ -15,6 +15,10 @@ describe("User Model", () => {
     expect(user.create).toBeDefined();
   });
 
+  it('should have a authenticate method', () => {
+    expect(user.authenticate).toBeDefined();
+  });
+
   it('should have a update method', () => {
     expect(user.edit).toBeDefined();
   });
@@ -30,6 +34,7 @@ describe("User Model", () => {
       lastname: 'gamal',
       password: '123456'
     });
+
     expect(result).toEqual({
       id: result.id,
       firstname: result.firstname,
@@ -38,10 +43,14 @@ describe("User Model", () => {
     });
   });
 
-
   it('authenticate method should authenticate a user', async () => {
     const result = await user.authenticate("mustafa", "gamal", "123456");
     expect(result).toBeTruthy();
+  });
+
+  it('index method should return a list of users', async () => {
+    const result = await user.index();
+    expect(result.length).toBe(result.length);
   });
 
   it('show method should return the correct user', async () => {

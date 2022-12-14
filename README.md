@@ -2,6 +2,8 @@
 
 ## Getting Started
 
+This repo contains a basic Node and Express Storesront backend project in constructing an API
+
 ## Technologies
 
 -   Postgres for the database
@@ -13,14 +15,38 @@
 
 ## Steps to Completion
 
-### 1. create database, it's name in .env file
+### 1. Creating database
 
-### 2. run migration through db:migrate
+-   it's name in .env file and the default PostgreSQL port is 5432 .
 
-### 3. API routes under 'src/routes
+### 2. Run migrations
 
-### 4. all scripts to run in package.json
+-   you can run migrations through 'db:migrate up'
 
-### 5. to test the environment type in terminal 'npm run test', if database created by test didn't droped the run 'npm run drop'
+### 3. API Routes
 
-### 6. don't fprget to change ENV to test in .env
+-   you can find the routes under 'src/routes' or in `REQUIREMENTS.md` document
+
+### 4. Scripts
+
+-   All scripts you need to run in `package.json`
+
+### 5. For the Unit Testing
+
+-   first, you have to change the environment to test in .env file
+    **Example**: ENV=test
+-   otherwise it will drop errors in dev environment
+-   you can drop the test database any time by running script 'npm run drop'
+
+### 6. Environment variables (dotenv):
+
+-   POSTGRES_HOST=localhost
+-   POSTGRES_DB=store_front
+-   POSTGRES_TEST_DB=store_front_test
+-   POSTGRES_USER=postgres
+-   POSTGRES_PASSWORD=Mustafa95
+-   POSTGRES_PORT=5432
+-   ENV=dev
+-   BCRYPT_PASSWORD=speak-friend-and-enter
+-   SALT_ROUNDS=10
+-   TOKEN_SECRET=sekobeko

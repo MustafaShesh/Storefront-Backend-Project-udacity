@@ -16,7 +16,6 @@ var verifyAuthToken = function (req, res, next) {
     catch (error) {
         res.status(401);
         res.json("Access denied, invalid token ".concat(error));
-        return;
     }
 };
 exports.verifyAuthToken = verifyAuthToken;

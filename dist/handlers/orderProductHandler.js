@@ -56,7 +56,6 @@ var addProduct = function (_req, res) { return __awaiter(void 0, void 0, void 0,
             case 2:
                 addedProduct = _a.sent();
                 res.json(addedProduct);
-                console.log('this is the add product route');
                 return [3 /*break*/, 4];
             case 3:
                 err_1 = _a.sent();

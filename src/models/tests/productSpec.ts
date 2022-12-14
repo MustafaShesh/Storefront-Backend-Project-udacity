@@ -38,6 +38,11 @@ describe("product Model", () => {
     });
   });
 
+  it('index method should return a list of products', async () => {
+    const result = await product.index();
+    expect(result.length).toBe(result.length);
+  });
+
   it('show method should return the correct product', async () => {
     const result = await product.show('1');
     expect(result).toEqual({

@@ -48,6 +48,9 @@ describe("User Model", function () {
     it('should have a create method', function () {
         expect(user.create).toBeDefined();
     });
+    it('should have a authenticate method', function () {
+        expect(user.authenticate).toBeDefined();
+    });
     it('should have a update method', function () {
         expect(user.edit).toBeDefined();
     });
@@ -84,6 +87,18 @@ describe("User Model", function () {
                 case 1:
                     result = _a.sent();
                     expect(result).toBeTruthy();
+                    return [2 /*return*/];
+            }
+        });
+    }); });
+    it('index method should return a list of users', function () { return __awaiter(void 0, void 0, void 0, function () {
+        var result;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, user.index()];
+                case 1:
+                    result = _a.sent();
+                    expect(result.length).toBe(result.length);
                     return [2 /*return*/];
             }
         });

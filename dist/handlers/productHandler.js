@@ -49,7 +49,6 @@ var index = function (_req, res) { return __awaiter(void 0, void 0, void 0, func
             case 1:
                 products = _a.sent();
                 res.json(products);
-                console.log('this is the INDEX route');
                 return [3 /*break*/, 3];
             case 2:
                 err_1 = _a.sent();
@@ -71,7 +70,6 @@ var show = function (req, res) { return __awaiter(void 0, void 0, void 0, functi
             case 1:
                 products = _a.sent();
                 res.json(products);
-                console.log('this is the SHOW route');
                 return [3 /*break*/, 3];
             case 2:
                 err_2 = _a.sent();
@@ -100,7 +98,6 @@ var create = function (req, res) { return __awaiter(void 0, void 0, void 0, func
             case 2:
                 newProduct = _a.sent();
                 res.json({ message: 'Product created successfully', newProduct: newProduct });
-                console.log('this is the CREATE route');
                 return [3 /*break*/, 4];
             case 3:
                 err_3 = _a.sent();
@@ -130,7 +127,6 @@ var update = function (req, res) { return __awaiter(void 0, void 0, void 0, func
             case 2:
                 editProduct = _a.sent();
                 res.json({ message: 'Product updated successfully', editProduct: editProduct });
-                console.log('this is the EDIT route');
                 return [3 /*break*/, 4];
             case 3:
                 err_4 = _a.sent();
@@ -152,7 +148,6 @@ var destroy = function (req, res) { return __awaiter(void 0, void 0, void 0, fun
             case 1:
                 deleted = _a.sent();
                 res.json({ message: "Product ".concat(req.params.id, " deleted"), deleted: deleted });
-                console.log('this is the DELETE route');
                 return [3 /*break*/, 3];
             case 2:
                 err_5 = _a.sent();

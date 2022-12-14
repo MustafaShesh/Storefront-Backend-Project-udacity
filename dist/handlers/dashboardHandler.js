@@ -49,7 +49,6 @@ var ordersByUser = function (_req, res) { return __awaiter(void 0, void 0, void 
             case 1:
                 users = _a.sent();
                 res.json(users);
-                console.log('this is the INDEX route');
                 return [3 /*break*/, 3];
             case 2:
                 err_1 = _a.sent();
@@ -71,7 +70,6 @@ var productsByCategory = function (_req, res) { return __awaiter(void 0, void 0,
             case 1:
                 products = _a.sent();
                 res.json(products);
-                console.log('this is the INDEX route');
                 return [3 /*break*/, 3];
             case 2:
                 err_2 = _a.sent();

@@ -13,7 +13,6 @@ export const addProduct = async (_req: Request, res: Response) => {
   try {
     const addedProduct = await store.addProduct(orderProduct.quantity, orderProduct.order_id, orderProduct.product_id)
     res.json(addedProduct)
-    console.log('this is the add product route')
   } catch (err) {
     res.status(400)
     res.json(err)
